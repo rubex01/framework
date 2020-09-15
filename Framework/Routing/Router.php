@@ -3,6 +3,8 @@
 namespace Framework\Routing;
 
 use App\Config;
+use Framework\Request\Request;
+use ReflectionClass;
 
 class Router
 {
@@ -17,6 +19,8 @@ class Router
     private static $pathMatchFound = false;
 
     private static $routeMatchFound = false;
+
+    private static $request;
 
     private static $basepath = BASEPATH;
 
@@ -44,6 +48,8 @@ class Router
 
     public static function run()
     {
+        self::$request = new Request();
+
         $parsedUrl = parse_url($_SERVER['REQUEST_URI']);
 
         if (isset($parsedUrl['path'])) {
@@ -133,6 +139,13 @@ class Router
 
     private static function runMethodRoute(string $controller, string $methodName, array $matches)
     {
+        $reflectionClass = new ReflectionClass($controller);
+        $firstParam = $reflectionClass->getMethod('renderPage')->getParameters()[0]->getClass()->name;
+        
+        if ($firstParam === 'Framework\Request\Request') {
+            array_unshift($matches, self::$request);
+        }
+
         $routeClass = new $controller;
         $routeClass->$methodName(...$matches);
     }

@@ -3,17 +3,18 @@
 namespace App\Controllers;
 
 use Framework\Validation\Validation;
+use Framework\Request\Request;
 
 class TestController
 {
-    public static function renderPage(string $test)
+    public static function renderPage(Request $request, string $test)
     {
-        echo $test;
+
     }
 
-    public static function test()
+    public static function test(Request $request)
     {
-        $validation = new Validation($_POST, [
+        $validation = new Validation($request->body, [
             'email' => ['required', 'email'],
             'password' => ['required', 'string'],
         ],
@@ -22,11 +23,12 @@ class TestController
             'email.email' => 'U heeft geen geldig email adres ingevoerd',
             'email.exists:users' => 'Er bestaat geen account met dit email adres',
             'password.required' => 'Wachtwoord is een verplicht veld',
-        ]
-        );
+        ]);
 
         if (count($validation->validationErrors) > 0) {
             print_r($validation->validationErrors);
         }
+
+        print_r($request->input('email'));
     }
 }
