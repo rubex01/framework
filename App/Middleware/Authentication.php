@@ -6,7 +6,7 @@ class Authentication
 {
     public function handle()
     {
-        if (true === true) {
+        if (1 === 1) {
             return true;
         }
     }

@@ -4,7 +4,6 @@ namespace App;
 
 class Config
 {
-
     public static $middleware = [];
 
     public static $routeMiddleware = [
@@ -14,5 +13,4 @@ class Config
     public static $exceptionHandler = [
 
     ];
-
 }
