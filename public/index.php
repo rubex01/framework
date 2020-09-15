@@ -13,6 +13,10 @@ namespace {
     Route::get('/hello/(.*)', [App\Controllers\TestController::class, 'renderPage'])
         ->middleware(['auth']);
 
+
+    Route::post('/test', [App\Controllers\TestController::class, 'test'])
+        ->middleware(['auth']);
+
     Route::run();
 }
 
