@@ -5,6 +5,7 @@ namespace Framework\Routing;
 use App\Config;
 use Framework\Request\Request;
 use ReflectionClass;
+use Framework\CSRF\CSRF;
 
 class Router
 {
@@ -23,6 +24,8 @@ class Router
     private static $request;
 
     private static $basepath = BASEPATH;
+
+    private static $disableCSRF = false;
 
     public static function addRoute(string $expression, $function, string $method = 'get')
     {
@@ -46,6 +49,11 @@ class Router
         ];
     }
 
+    public static function init()
+    {
+        
+    }
+
     public static function run()
     {
         self::$request = new Request();
@@ -58,7 +66,22 @@ class Router
             $path = '/';
         }
 
+        self::runCSRFcheck();
+
         self::runFunctionForRoute($path);
+    }
+
+    public static function disableCSRF()
+    {
+        self::$disableCSRF = true;
+        return new static;
+    }
+
+    private static function runCSRFcheck()
+    {
+        if (self::$disableCSRF === false) {
+            CSRF::checkCSRFtoken(self::$request);
+        }
     }
 
     private static function runFunctionForRoute (string $path)
