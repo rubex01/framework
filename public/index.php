@@ -12,13 +12,7 @@ namespace {
 
     define('BASEPATH', '/');
 
-
-    Route::get('/', [App\Controllers\TestController::class, 'index']);
-
-
-    Route::post('/hello/(.*)', [App\Controllers\TestController::class, 'post'])
-        ->disableCSRF()
-        ->middleware(['auth']);
+    Route::get('/', [App\Controllers\ExampleController::class, 'index']);
 
     Route::run();
 }

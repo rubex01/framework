@@ -2,6 +2,8 @@
 
 namespace Framework\Validation;
 
+use DateTime;
+
 trait ValidationMethods
 {
 
