@@ -15,7 +15,7 @@ class TestController
     public static function test(Request $request)
     {
         $validation = new Validation($request->body, [
-            'email' => ['required', 'email'],
+            'email' => ['required', 'email', 'unique:users'],
             'password' => ['required', 'string'],
         ],
         [
@@ -29,6 +29,5 @@ class TestController
             print_r($validation->validationErrors);
         }
 
-        print_r($request->input('email'));
     }
 }

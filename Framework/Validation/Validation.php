@@ -2,7 +2,7 @@
 
 namespace Framework\Validation;
 
-use Framework\Database;
+use Framework\Database\Database;
 use DateTime;
 use Framework\Validation\ValidationMethods;
 
@@ -68,7 +68,7 @@ class Validation
             $this->customMessages = $customMessages;
         }
 
-        // $this->database = new Database();
+        $this->database = Database::$Connections['MySQL'];
 
         $this->handleFilters();
     }
@@ -187,25 +187,6 @@ class Validation
                 $this->fileFilter($input);
                 break;
         }
-    }
-
-    /**
-     * Check if input does not already exist in specified table
-     * 
-     * @param array $input
-     * @param string $table
-     * @return boolean
-     */
-    private function uniqueFilter(array $input, string $table)
-    {
-        $stmt = $this->database->conn->prepare('SELECT 1 FROM ' . $table . ' WHERE ' . $input[0] . ' = ?');
-        $stmt->bind_param("s", $input[1]);
-        $stmt->execute();
-        $result = $stmt->get_result();
-        if ($result->num_rows === 0) {
-            return true;
-        }
-        $this->newValidationError($input);
     }
 
     /**
