@@ -27,6 +27,7 @@ class CSRF
         else if ($requestMethod === 'POST' || $requestMethod === 'PUT' || $requestMethod === 'PATCH') {
             //todo:: throw correct error
             echo 'There was no csrf token found on the form submission. Please disable csrf for this route or add a csrf token on the request body.';
+            exit();
         }
     }
 }
