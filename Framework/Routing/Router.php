@@ -25,8 +25,6 @@ class Router
 
     private static $basepath = BASEPATH;
 
-    public static $disableCSRF = false;
-
     public static function addRoute(string $expression, $function, string $method = 'get')
     {
         if (is_array($function)) {
@@ -74,9 +72,7 @@ class Router
     private static function runCSRFcheck(array $route)
     {
         if (!isset($route['csrf'])) {
-            if (self::$disableCSRF === false) {
-                CSRF::checkCSRFtoken(self::$request);
-            }
+            CSRF::checkCSRFtoken(self::$request);
         }
     }
 
