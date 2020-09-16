@@ -6,14 +6,25 @@ use Framework\Request\Request;
 
 class CSRF
 {
-    public static function init()
+    /**
+     * Check if the cookie isset if not generate one
+     * 
+     * @return void
+     */
+    public static function init() : void
     {
         if (!isset($_COOKIE['CSRFtoken'])) {
             setcookie('CSRFToken', bin2hex(random_bytes(32)), time() + (86400 * 30), "/");
         }
     }
 
-    public function checkCSRFtoken(Request $request)
+    /**
+     * Check if CSRF token is correct and if it is sent with the form
+     * 
+     * @param Request $request
+     * @return void
+     */
+    public function checkCSRFtoken(Request $request) : void
     {
         $requestMethod = $request->requestMethod();
 

@@ -9,23 +9,71 @@ use Framework\CSRF\CSRF;
 
 class Router
 {
+    /**
+     * Contains all routes
+     * 
+     * @var array
+     */
     protected static $routes = [];
 
+    /**
+     * Contains current route
+     * 
+     * @var array
+     */
     protected static $currentRoute;
 
+    /**
+     * Contains path that isn't found
+     * 
+     * @var string
+     */
     protected static $pathNotFound = null;
 
-    protected static $methodNotAllowed = null;
+    /**
+     * Contains method that isn't allowed
+     * 
+     * @var string
+     */
+    private static $methodNotAllowed = null;
 
+    /**
+     * Contains path that is found
+     * 
+     * @var string
+     */
     private static $pathMatchFound = false;
 
+    /**
+     * Contains route that is found
+     * 
+     * @var string
+     */
     private static $routeMatchFound = false;
 
+    /**
+     * Contains request object
+     * 
+     * @var object
+     */
     private static $request;
 
+    /**
+     * Contains basepath
+     * 
+     * @var string
+     */
     private static $basepath = BASEPATH;
 
-    public static function addRoute(string $expression, $function, string $method = 'get')
+    /**
+     * Add route to routes array
+     * 
+     * @param string $expression
+     * @param $function
+     * @param string $method
+     * @return void
+     */
+    public static function addRoute(string $expression, $function, string $method = 'get') : void
     {
         if (is_array($function)) {
             $function = [
@@ -47,7 +95,12 @@ class Router
         ];
     }
 
-    public static function run()
+    /**
+     * Run routes functions
+     * 
+     * @return void
+     */
+    public static function run() : void
     {
         self::$request = new Request();
 
@@ -62,21 +115,38 @@ class Router
         self::runFunctionForRoute($path);
     }
 
-    public static function disableCSRF()
+    /**
+     * Disable the CSRF check for the current route
+     * 
+     * @return object
+     */
+    public static function disableCSRF() : object
     {
         $key = array_search(self::$currentRoute, self::$routes);
         self::$routes[$key]['csrf'] = false;
         return new static;
     }
 
-    private static function runCSRFcheck(array $route)
+    /**
+     * Run CSRF check on current route with request object
+     * 
+     * @param array $route
+     * @return void
+     */
+    private static function runCSRFcheck(array $route) : void
     {
         if (!isset($route['csrf'])) {
             CSRF::checkCSRFtoken(self::$request);
         }
     }
 
-    private static function runFunctionForRoute (string $path)
+    /**
+     * Find requested route and run the specified function or run method function
+     * 
+     * @param string $path
+     * @return void
+     */
+    private static function runFunctionForRoute (string $path) : void
     {
         $basepath = self::$basepath;
 
@@ -137,7 +207,14 @@ class Router
         }
     }
 
-    public static function methodNotAllowed($path, $method)
+    /**
+     * Method is not allowed
+     * 
+     * @param string $path
+     * @param string $method
+     * @return void
+     */
+    public static function methodNotAllowed($path, $method) : void
     {
         //todo:: give correct error w error handler
         echo 'Error 405 :-(<br>';
@@ -145,8 +222,13 @@ class Router
         header('HTTP/1.0 405 Method Not Allowed');
     }
 
-
-    public static function pathNotFound($path)
+    /**
+     * Path is not found
+     * 
+     * @param string $path
+     * @return void
+     */
+    public static function pathNotFound($path) : void
     {
         //todo:: give correct error w error handler
         echo 'Error 404 :-(<br>';
@@ -154,7 +236,15 @@ class Router
         header('HTTP/1.0 404 Not Found');
     }
 
-    private static function runMethodRoute(string $controller, string $methodName, array $matches)
+    /**
+     * Run method for route
+     * 
+     * @param string $controller
+     * @param string $methodName
+     * @param array $matches
+     * @return void
+     */
+    private static function runMethodRoute(string $controller, string $methodName, array $matches) : void
     {
         $reflectionClass = new ReflectionClass($controller);
         
@@ -175,7 +265,13 @@ class Router
         $routeClass->$methodName(...$matches);
     }
 
-    private function urldecodeMatchesArray(array $matches)
+    /**
+     * Url decode variables found in url
+     * 
+     * @param array $matches
+     * @return array
+     */
+    private function urldecodeMatchesArray(array $matches) : array
     {
         $newMatches = [];
         foreach ($matches as $match) {
@@ -184,7 +280,13 @@ class Router
         return $newMatches;
     }
 
-    private function runRouteMiddleware(array $middlewareArray)
+    /**
+     * Run middleware for route
+     * 
+     * @param array $middlewareArray
+     * @return void
+     */
+    private function runRouteMiddleware(array $middlewareArray) : void
     {
         $allMiddleware = Config::$routeMiddleware;
 

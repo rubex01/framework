@@ -6,43 +6,92 @@ use Framework\Routing\Router;
 
 class Route extends Router
 {
-    public static function get($path, $function)
+    /**
+     * Add get method route
+     * 
+     * @param string $path
+     * @param $function
+     * @return object
+     */
+    public static function get($path, $function) : object
     {
         self::addRoute($path, $function, 'get');
         return new static;
     }
 
-    public static function post($path, $function)
+    /**
+     * Add post method route
+     * 
+     * @param string $path
+     * @param $function
+     * @return object
+     */
+    public static function post($path, $function) : object
     {
         self::addRoute($path, $function, 'post');
         return new static;
     }
 
-    public static function put($path, $function)
+    /**
+     * Add put method route
+     * 
+     * @param string $path
+     * @param $function
+     * @return object
+     */
+    public static function put($path, $function) : object
     {
         self::addRoute($path, $function, 'put');
         return new static;
     }
 
-    public static function patch($path, $function)
+    /**
+     * Add patch method route
+     * 
+     * @param string $path
+     * @param $function
+     * @return object
+     */
+    public static function patch($path, $function) : object
     {
         self::addRoute($path, $function, 'patch');
         return new static;
     }
 
-    public static function delete($path, $function)
+    /**
+     * Add delete method route
+     * 
+     * @param string $path
+     * @param $function
+     * @return object
+     */
+    public static function delete($path, $function) : object
     {
         self::addRoute($path, $function, 'delete');
         return new static;
     }
 
-    public static function options($path, $function)
+    /**
+     * Add options method route
+     * 
+     * @param string $path
+     * @param $function
+     * @return object
+     */
+    public static function options($path, $function) : object
     {
         self::addRoute($path, $function, 'options');
         return new static;
     }
 
-    public static function middleware(array $middlewareArray) {
+    /**
+     * Add middleware to route
+     * 
+     * @param array $middlewareArray
+     * @return void
+     */
+    public static function middleware(array $middlewareArray) : void
+    {
         $key = array_search(self::$currentRoute, self::$routes);
         foreach ($middlewareArray as $middleware) {
             self::$routes[$key]['middleware'][] = $middleware;
