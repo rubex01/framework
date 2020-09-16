@@ -60,7 +60,7 @@ class Validation
      * @param array @customMessages
      * @return void
      */
-    public function __construct(array $postData, array $filterData, array $customMessages = null)
+    public function __construct(array $postData, array $filterData, array $customMessages = null, string $databaseConnectionName = null)
     {
         $this->postData = $postData;
         $this->filterData = $filterData;
@@ -68,7 +68,12 @@ class Validation
             $this->customMessages = $customMessages;
         }
 
-        $this->database = Database::$Connections['MySQL'];
+        if ($databaseConnectionName === null) {
+            $this->database = reset(Database::$Connections);
+        }
+        else {
+            $this->database = Database::$Connections[$databaseConnectionName];
+        }
 
         $this->handleFilters();
     }

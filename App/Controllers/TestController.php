@@ -28,7 +28,7 @@ class TestController
                 'email.email' => 'U heeft geen geldig email adres ingevoerd',
                 'email.exists:users' => 'Er bestaat geen account met dit email adres',
                 'password.required' => 'Wachtwoord is een verplicht veld',
-            ]
+            ],
         );
 
         if (count($validation->validationErrors) > 0) {

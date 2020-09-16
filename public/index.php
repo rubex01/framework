@@ -17,7 +17,7 @@ namespace {
 
 
     Route::post('/hello/(.*)', [App\Controllers\TestController::class, 'post'])
-        // ->disableCSRF()
+        ->disableCSRF()
         ->middleware(['auth']);
 
     Route::run();
