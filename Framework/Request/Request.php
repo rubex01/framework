@@ -71,6 +71,16 @@ class Request
     }
 
     /**
+     * Get the request method
+     * 
+     * @return string
+     */
+    public function requestMethod()
+    {
+        return $this->server['REQUEST_METHOD'];
+    }
+
+    /**
      * Get specified input from body
      * 
      * @parameter string $name
@@ -78,8 +88,13 @@ class Request
      */
     public function input(string $name = null) 
     {
-        $data = $name ? $this->body[$name] : $this->body;
-        return $data;
+        if ($name) {
+            if (isset($this->body[$name])) {
+                return $this->body[$name];
+            }
+            return null;
+        }
+        return $this->body;
     }
 
     /**

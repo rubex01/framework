@@ -3,10 +3,7 @@
 namespace {
     include __DIR__ . '/../Framework/autoload.php';
 
-    use Framework\Routing\Route as Route;
-    use Framework\CSRF\CSRF;
-
-    CSRF::checkCSRFtoken();
+    use Framework\Routing\Route as Route;  
 
     define('BASEPATH', '/');
 
@@ -15,6 +12,7 @@ namespace {
 
 
     Route::post('/test', [App\Controllers\TestController::class, 'test'])
+        ->disableCSRF()
         ->middleware(['auth']);
 
     Route::run();
