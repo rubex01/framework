@@ -12,7 +12,7 @@ class ExampleController
     {
         return Pages::view('default', 'welcome', [
                 'subheader' => 'Say hello to freedom..',
-                'header' => 'Experience the joy of coding and skip the messy parts', 
+                'header' => 'Experience the joy of coding <br> and skip the messy parts', 
                 'title' => 'Hello world!'
             ]);
     }
