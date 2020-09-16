@@ -25,8 +25,6 @@ class Router
 
     private static $basepath = BASEPATH;
 
-    private static $disableCSRF = false;
-
     public static function addRoute(string $expression, $function, string $method = 'get')
     {
         if (is_array($function)) {
@@ -49,11 +47,6 @@ class Router
         ];
     }
 
-    public static function init()
-    {
-        
-    }
-
     public static function run()
     {
         self::$request = new Request();
@@ -66,20 +59,19 @@ class Router
             $path = '/';
         }
 
-        self::runCSRFcheck();
-
         self::runFunctionForRoute($path);
     }
 
     public static function disableCSRF()
     {
-        self::$disableCSRF = true;
+        $key = array_search(self::$currentRoute, self::$routes);
+        self::$routes[$key]['csrf'] = false;
         return new static;
     }
 
-    private static function runCSRFcheck()
+    private static function runCSRFcheck(array $route)
     {
-        if (self::$disableCSRF === false) {
+        if (!isset($route['csrf'])) {
             CSRF::checkCSRFtoken(self::$request);
         }
     }
@@ -106,6 +98,8 @@ class Router
                 if (strtolower($method) == strtolower($route['method'])) {
                     array_shift($matches);
 
+                    self::runCSRFcheck($route);
+ 
                     if ($basepath != '' && $basepath != '/') {
                         array_shift($matches);
                     }

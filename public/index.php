@@ -15,6 +15,10 @@ namespace {
         ->disableCSRF()
         ->middleware(['auth']);
 
+    Route::post('/tes2t', [App\Controllers\TestController::class, 'test'])
+        // ->disableCSRF()
+        ->middleware(['auth']);
+
     Route::run();
 }
 
