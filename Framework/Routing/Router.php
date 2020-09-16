@@ -157,7 +157,15 @@ class Router
     private static function runMethodRoute(string $controller, string $methodName, array $matches)
     {
         $reflectionClass = new ReflectionClass($controller);
-        $firstParam = $reflectionClass->getMethod('renderPage')->getParameters()[0]->getClass()->name;
+        
+        $parameters = $reflectionClass->getMethod($methodName)->getParameters();
+
+        if (count($parameters) > 0) {
+            $firstParam = $parameters[0]->getClass()->name;
+        }
+        else {
+            $firstParam = null;
+        }
         
         if ($firstParam === 'Framework\Request\Request') {
             array_unshift($matches, self::$request);
