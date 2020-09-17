@@ -21,7 +21,7 @@ class HttpExceptions extends Exception
     public function returnCustomError()
     {
         header(trim("HTTP/1.0 $this->code"));
-        return Pages::view('error', 'error', [
+        return Pages::view('default', 'error', [
             'title' => 'Error: '.$this->message,
             'code' => $this->code,
             'message' => $this->message,
