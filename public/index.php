@@ -2,7 +2,6 @@
 
 namespace {
     include __DIR__ . '/../Framework/autoload.php';
-    include __DIR__ . '/../Framework/ErrorHandling.php';
 
     use Framework\Routing\Route as Route;  
     use Framework\Database\Database;
