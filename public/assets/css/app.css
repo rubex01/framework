@@ -49,3 +49,54 @@ html, body {
     box-shadow: 1px 1px 8px rgba(0, 0, 0, .2);
     transform: scale(1.2);
 }
+
+.error-container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.table-error-title {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.table-error-title h1 {
+    margin-right: 1rem;
+}
+
+.error-hr {
+    margin: 2rem 0 3rem;
+    border-color: rgba(0, 0, 0, .1);
+}
+
+.error-file {
+    background: rgba(178, 151, 255, .1);
+    color:  rgb(178, 151, 255);
+    text-decoration: underline;
+}
+
+.error-line {
+    background: rgba(255, 0, 0, .1);
+    color: rgba(255, 0, 0, .8);
+}
+
+.error-function {
+    background: rgba(237, 70, 0, .1);
+    color: rgba(237, 70, 0, .8);
+}
+
+.error-args {
+    background: rgba(17, 19, 134, .1);
+    color: rgba(17, 19, 134, .8);
+}
+
+.error-list td {
+    padding: .4rem .5rem;
+}
+
+.error-list td span {
+    padding: .2rem .5rem;
+    border-radius: .5rem;
+}

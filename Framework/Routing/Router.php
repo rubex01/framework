@@ -6,6 +6,7 @@ use App\Config;
 use Framework\Request\Request;
 use ReflectionClass;
 use Framework\CSRF\CSRF;
+use Framework\Exceptions\HttpExceptions;
 
 class Router
 {
@@ -136,7 +137,12 @@ class Router
     private static function runCSRFcheck(array $route) : void
     {
         if (!isset($route['csrf'])) {
-            CSRF::checkCSRFtoken(self::$request);
+            try {
+                CSRF::checkCSRFtoken(self::$request);
+            } 
+            catch (HttpExceptions $th) {
+                exit();
+            }
         }
     }
 
@@ -178,7 +184,9 @@ class Router
                         self::runRouteMiddleware($route['middleware']);
                     }
 
-                    $matches = self::urldecodeMatchesArray($matches);
+                    if (count($matches) > 0) {
+                        $matches = self::urldecodeMatchesArray($matches);
+                    }
 
                     if (is_array($route['function'])) {
                         self::runMethodRoute(
@@ -219,6 +227,7 @@ class Router
         //todo:: give correct error w error handler
         echo 'Error 405 :-(<br>';
         echo 'The requested path "' . $path . '" exists. But the request method "' . $method . '" is not allowed on this path!';
+        
         header('HTTP/1.0 405 Method Not Allowed');
     }
 
@@ -299,9 +308,11 @@ class Router
                 }
             }
             else {
-                //todo:: give correct error w error handler
-                echo 'error';
-                exit();
+                try {
+                    throw new HttpExceptions('Middleware function has not been declared in the config file.', 500);
+                } catch (HttpExceptions $th) {
+                    exit();
+                }
             }
         }
     }
