@@ -4,6 +4,7 @@ namespace Framework\Database;
 
 use mysqli;
 use Framework\Database\DatabaseInterface;
+use Framework\Exceptions\HttpExceptions;
 
 class MySQL implements DatabaseInterface
 {
@@ -78,8 +79,10 @@ class MySQL implements DatabaseInterface
      */
     public function connectionError(string $causeOfException) : void
     {
-        //todo:: correct error handling
-        echo $causeOfException;
-        exit();
+        try {
+            throw new HttpExceptions($causeOfException, 500);
+        } catch (HttpExceptions $th) {
+            exit();
+        }
     }
 }

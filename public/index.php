@@ -13,6 +13,8 @@ namespace {
     define('BASEPATH', '/');
 
     Route::get('/', [App\Controllers\ExampleController::class, 'index']);
+
+    Route::post('/', [App\Controllers\ExampleController::class, 'index']);
     
     Route::run();
 }

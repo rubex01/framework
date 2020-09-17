@@ -3,6 +3,7 @@
 namespace Framework\CSRF;
 
 use Framework\Request\Request;
+use Framework\Exceptions\HttpExceptions;
 
 class CSRF
 {
@@ -24,21 +25,17 @@ class CSRF
      * @param Request $request
      * @return void
      */
-    public function checkCSRFtoken(Request $request) : void
+    public static function checkCSRFtoken(Request $request) : void
     {
         $requestMethod = $request->requestMethod();
 
         if ($request->input('CSRFtoken') !== null) {
             if ($request->input('CSRFtoken') !== $_COOKIE['CSRFToken']) {
-                //todo:: throw correct error
-                echo 'error';
-                exit();
+                throw new HttpExceptions('CSRF token validation failed. Please try again.', 403);
             }
         }
         else if ($requestMethod === 'POST' || $requestMethod === 'PUT' || $requestMethod === 'PATCH') {
-            //todo:: throw correct error
-            echo 'There was no csrf token found on the form submission. Please disable csrf for this route or add a csrf token on the request body.';
-            exit();
+            throw new HttpExceptions('There was no CSRF token found on the form submission. Please disable CSRF for this route or add a CSRF token to the request body.', 403);
         }
     }
 }
