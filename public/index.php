@@ -1,16 +1,31 @@
 <?php
 
 namespace {
+
+    // Autoload classes
     include __DIR__ . '/../Framework/autoload.php';
 
-    use Framework\Routing\Route as Route;  
+    // Use Route and Database classes
+    use Framework\Routing\Route;  
     use Framework\Database\Database;
     use Framework\Database\MySQL;
 
+    // Setup Database connection
     $database = new MySQL;
     Database::connect($database);
 
+    // Defining basepath of app
     define('BASEPATH', '/');
+
+    /*
+    |--------------------------------------------------------------------------
+    | Web Routes
+    |--------------------------------------------------------------------------
+    |
+    | Here you can register new routes for your app. See the docs to get 
+    | started. Now create something beautiful!
+    |
+    */
 
     Route::get('/', [App\Controllers\ExampleController::class, 'index']);
 
