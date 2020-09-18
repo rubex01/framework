@@ -9,7 +9,6 @@ class HttpExceptions extends Exception
 {
     public function __construct($message, $code = 0)
     {
-
         $this->$message = $message;
         $this->$code = $code;
 
@@ -21,6 +20,12 @@ class HttpExceptions extends Exception
     public function returnCustomError()
     {
         header(trim("HTTP/1.0 $this->code"));
+
+        if (getenv('ENVIRONMENT') === 'production' && getenv('DEBUGGING') == false || getenv('DEBUGGING') == false) {
+            http_response_code(500);
+            exit();
+        }
+
         return Pages::view('default', 'error', [
             'title' => 'Error: '.$this->message,
             'code' => $this->code,
