@@ -2,7 +2,6 @@
 #### This is an easy to use and fast PHP framework. To see how to get started check the [Getting Started](https://github.com/rubex01/framework-rubex/wiki/Getting-started) instructions. 
 
 <br/>
-<br/>
 
 #### Functionality
 * Routes with all HTTP request methods
