@@ -57,11 +57,10 @@ class MySQL implements DatabaseInterface
      */
     public function makeDatabaseConnection() : object
     {
-        //todo:: get info from .env
-        $this->serverName = 'localhost';
-        $this->username = 'root';
-        $this->password = '';
-        $this->dbName = 'webshop_example';
+        $this->serverName = getenv('DB_HOST');
+        $this->username = getenv('DB_USERNAME');
+        $this->password = getenv('DB_PASSWORD');
+        $this->dbName = getenv('DB_NAME');
 
         $this->Conn = new mysqli($this->serverName, $this->username, $this->password, $this->dbName);
 
