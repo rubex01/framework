@@ -1,5 +1,9 @@
 <?php
 
+if (file_exists(__DIR__ . '/../.env.php')) {
+    include __DIR__ . '/../.env.php';
+}
+
 spl_autoload_register(function ($className) {
 
     $extension = '.php';
