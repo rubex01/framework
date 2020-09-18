@@ -6,6 +6,9 @@ if (getenv('ENVIRONMENT') === 'production' && getenv('DEBUGGING') == false || ge
 
 if (file_exists(__DIR__ . '/../.env.php')) {
     include __DIR__ . '/../.env.php';
+    foreach ($variables as $key => $value) {
+        putenv("$key=$value");
+    }
 }
 
 spl_autoload_register(function ($className) {
