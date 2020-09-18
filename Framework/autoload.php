@@ -1,5 +1,9 @@
 <?php
 
+if (getenv('ENVIRONMENT') === 'production' && getenv('DEBUGGING') == false || getenv('DEBUGGING') == false) {
+    error_reporting(0);
+}
+
 if (file_exists(__DIR__ . '/../.env.php')) {
     include __DIR__ . '/../.env.php';
 }
