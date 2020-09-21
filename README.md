@@ -1,7 +1,5 @@
 # Framework
-#### This is an easy to use and fast PHP framework. To see how to get started check the [Getting Started](https://github.com/rubex01/framework-rubex/wiki/Getting-started) instructions. 
-
-<br/>
+#### This is an easy to use and fast PHP framework. To see how to get started check the [Quick start](https://github.com/rubex01/framework-rubex/wiki/Quick-start) instructions. 
 
 #### Functionality
 * Routes with all HTTP request methods
@@ -11,19 +9,22 @@
 * Easy to use Request object for every request
 * Easy middleware functionality
 * Easy controller functionality
+* Default Auth support with device fingerprinting
+* Simple caching for webpages
+* Support for views to easily return webpages
 * More to come...
 
 #### Upcoming features
-* Default Auth support with device fingerprinting
+
 * Default storage controlling included
-* Simple caching for webpages
-* Support for views to easily return webpages
 * Support for directly returning static pages in Routes
+* Commmands for generating controllers, middleware and other files faster.
 
 #### Requirements
 * PHP 7.3 or newer
-* Database server (By default there is a MySQL database connection setup in Framework/Database/MySQL.php but this can be customized)
+* get_browser php extension enabled
+* Database (By default there is a MySQL database connection setup in Framework/Database/MySQL.php but this can be customized)
 * Web server with support for PHP (support for apache is pre-supplied see .htaccess, for nginx a custom setup is needed)
 
 #### Installation
-* View the getting started guide [here](https://github.com/rubex01/framework-rubex/wiki/Getting-started)
+* View the getting [Quick start guide](https://github.com/rubex01/framework-rubex/wiki/Quick-start)
