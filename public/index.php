@@ -6,13 +6,15 @@ namespace {
     include __DIR__ . '/../Framework/autoload.php';
 
     // Use Route and Database classes
-    use Framework\Routing\Route;  
+    use Framework\Auth\Auth;
+    use Framework\Routing\Route;
     use Framework\Database\Database;
     use Framework\Database\MySQL;
 
     // Setup Database connection
     $database = new MySQL;
     Database::connect($database);
+    $Authorization = new Auth();
 
     // Defining basepath of app
     define('BASEPATH', '/');
@@ -28,8 +30,6 @@ namespace {
     */
 
     Route::get('/', [App\Controllers\ExampleController::class, 'index']);
-
-    Route::post('/', [App\Controllers\ExampleController::class, 'index']);
     
     Route::run();
 }

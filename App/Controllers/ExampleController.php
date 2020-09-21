@@ -6,6 +6,7 @@ use Framework\Exceptions\HttpExceptions;
 use Framework\Validation\Validation;
 use Framework\Request\Request;
 use Framework\Pages\Pages;
+use Framework\Auth\Auth;
 
 class ExampleController
 {
