@@ -1,7 +1,11 @@
 <?php
 
+include __DIR__ . '/../autoload.php';
+
 class Create
 {
+    use \Framework\Commands\ConsoleErrorTrait;
+
     /**
      * Contains array of all the types that are in the json
      *
@@ -125,17 +129,6 @@ class Create
         $newFile = fopen(__DIR__ . '/../../'.self::$createInfo->path.'/' . $className . '.php', 'w');
         fwrite($newFile, $fileContent);
         return true;
-    }
-
-    /**
-     * Reports errors if there are any
-     *
-     */
-    public static function reportError()
-    {
-        foreach (self::$errors as $error) {
-            echo "$error...\n";
-        }
     }
 }
 
