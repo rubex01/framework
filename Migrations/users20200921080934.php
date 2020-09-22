@@ -11,10 +11,11 @@ class users20200921080934 extends Migrations implements MigrationInterface
     {
         $this->addSql("
                 CREATE TABLE `users` (
-                  `user_id` int(11) NOT NULL,
+                  `user_id` int(11) NOT NULL AUTO_INCREMENT,
                   `username` varchar(255) NOT NULL,
                   `email` varchar(255) NOT NULL,
-                  `password` varchar(255) NOT NULL
+                  `password` varchar(255) NOT NULL,
+                  PRIMARY KEY (user_id)
                 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
             ");
     }
