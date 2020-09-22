@@ -7,6 +7,8 @@ include __DIR__ . '/../autoload.php';
 
 class Run
 {
+    use \Framework\Commands\ConsoleErrorTrait;
+
     /**
      * Contains the directory witch contains all the migrations are
      *
@@ -109,16 +111,6 @@ class Run
             $run = new $className;
             $method = self::$migrationMethod;
             $run->$method();
-        }
-    }
-
-    /**
-     * Report the errors if any occured
-     */
-    public static function reportError()
-    {
-        foreach (self::$errors as $error) {
-            echo "$error...\n";
         }
     }
 }

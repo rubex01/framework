@@ -2,8 +2,12 @@
 
 namespace Framework\Commands;
 
+include __DIR__ . '/../autoload.php';
+
 class Start
 {
+    use \Framework\Commands\ConsoleErrorTrait;
+
     /**
      * Contains all the errors that occurred
      *
@@ -35,16 +39,6 @@ class Start
             return false;
         }
         if (copy(__DIR__ . '/../../.env.example.php',__DIR__ . '/../../.env.php')) return true;
-    }
-
-    /**
-     * Report the errors if any occurred
-     */
-    public static function reportError()
-    {
-        foreach (self::$errors as $error) {
-            echo "$error...\n";
-        }
     }
 }
 
