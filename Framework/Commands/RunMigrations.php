@@ -59,7 +59,23 @@ class Run
      */
     public static function getMigrationFiles() : array
     {
-        return array_slice(scandir(self::$migrationDir), 2);
+        $getFiles = array_slice(scandir(self::$migrationDir), 2);
+
+        $sortedArray = [];
+
+        foreach ($getFiles as $key => $file) {
+            $sortedArray[] = ['time' => substr($file, -18, 14), 'file' => $file];
+        }
+
+        usort($sortedArray, function($a, $b) {
+            return $a['time'] <=> $b['time'];
+        });
+
+        foreach ($sortedArray as $key => $sortedArrayItem) {
+            $sortedArray[$key] = $sortedArrayItem['file'];
+        }
+
+        return array_reverse($sortedArray);
     }
 
     /**
