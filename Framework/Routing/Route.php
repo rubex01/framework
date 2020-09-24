@@ -96,5 +96,17 @@ class Route extends Router
         foreach ($middlewareArray as $middleware) {
             self::$routes[$key]['middleware'][] = $middleware;
         }
-    }    
+    }
+
+    /**
+     * Add action to route to later check if permission needs to be granted
+     *
+     * @param string $action
+     * @return void
+     */
+    public static function action(string $action) : void
+    {
+        $key = array_search(self::$currentRoute, self::$routes);
+        self::$routes[$key]['action'] = $action;
+    }
 }
