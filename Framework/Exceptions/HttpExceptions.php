@@ -9,8 +9,8 @@ class HttpExceptions extends Exception
 {
     public function __construct($message, $code = 0)
     {
-        $this->$message = $message;
-        $this->$code = $code;
+        $this->message = $message;
+        $this->code = $code;
 
         parent::__construct($message, $code);
 
@@ -22,7 +22,12 @@ class HttpExceptions extends Exception
         header(trim("HTTP/1.0 $this->code"));
 
         if (getenv('ENVIRONMENT') === 'production' && getenv('DEBUGGING') == false || getenv('DEBUGGING') == false) {
-            http_response_code(500);
+            http_response_code($this->code);
+            exit();
+        }
+
+        if ($this->code !== 500) {
+            http_response_code($this->code);
             exit();
         }
 

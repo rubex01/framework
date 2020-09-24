@@ -77,7 +77,7 @@ class Run
             $sortedArray[$key] = $sortedArrayItem['file'];
         }
 
-        return array_reverse($sortedArray);
+        return (self::$migrationMethod === 'up') ? array_reverse($sortedArray) : $sortedArray;
     }
 
     /**

@@ -7,6 +7,7 @@ use Framework\Request\Request;
 use ReflectionClass;
 use Framework\CSRF\CSRF;
 use Framework\Exceptions\HttpExceptions;
+use Framework\Auth\Auth;
 
 class Router
 {
@@ -180,6 +181,10 @@ class Router
                         array_shift($matches);
                     }
 
+                    if (isset($route['action'])) {
+                        self::runActionRoleCheck($route['action']);
+                    }
+
                     if (isset($route['middleware'])) {
                         self::runRouteMiddleware($route['middleware']);
                     }
@@ -229,6 +234,30 @@ class Router
         echo 'The requested path "' . $path . '" exists. But the request method "' . $method . '" is not allowed on this path!';
         
         header('HTTP/1.0 405 Method Not Allowed');
+    }
+
+    /**
+     * Check if user has right role to complete action
+     *
+     * @param string $action
+     * @return bool
+     */
+    public static function runActionRoleCheck(string $action) : bool
+    {
+        try {
+            if (!file_exists(__DIR__ . '/../../Roles.json')) {
+                throw new HttpExceptions('Please enable the roles functionality by typing "php .\Framework\Commands\Roles.php" in the command line.', 500);
+            }
+            $rolesAndActions = json_decode(file_get_contents(__DIR__ . '/../../Roles.json'));
+            $roleKey = array_search(Auth::$user['role'], $rolesAndActions->roles);
+            if (isset($rolesAndActions->actions->$action) && in_array($roleKey, $rolesAndActions->actions->$action)) {
+                return true;
+            }
+            throw new HttpExceptions('You do not have the permission to execute this action', 401);
+        }
+        catch (HttpExceptions $th) {
+            exit();
+        }
     }
 
     /**

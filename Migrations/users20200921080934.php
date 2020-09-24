@@ -15,6 +15,7 @@ class users20200921080934 extends Migrations implements MigrationInterface
                   `username` varchar(255) NOT NULL,
                   `email` varchar(255) NOT NULL,
                   `password` varchar(255) NOT NULL,
+                  `role` varchar(255) DEFAULT NULL,
                   PRIMARY KEY (user_id)
                 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
             ");
