@@ -10,6 +10,7 @@
 * Easy middleware functionality
 * Easy controller functionality
 * Default Auth support with device fingerprinting
+* Default Roles support
 * Simple caching for webpages
 * Support for views to easily return webpages
 * More to come...
