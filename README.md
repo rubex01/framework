@@ -28,4 +28,4 @@
 * Web server with support for PHP (support for apache is pre-supplied see .htaccess, for nginx a custom setup is needed)
 
 #### Installation
-* View the getting [Quick start guide](https://github.com/rubex01/framework-rubex/wiki/Quick-start)
+* View the [Quick start guide](https://github.com/rubex01/framework-rubex/wiki/Quick-start)
