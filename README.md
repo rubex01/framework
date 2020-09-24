@@ -16,9 +16,10 @@
 
 #### Upcoming features
 
-* Default storage controlling included
+* Default storage controlling logic included
 * Support for directly returning static pages in Routes
 * Commmands for generating controllers, middleware and other files faster.
+* Logic for generating test data included
 
 #### Requirements
 * PHP 7.3 or newer
