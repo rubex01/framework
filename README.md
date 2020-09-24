@@ -24,7 +24,7 @@
 #### Requirements
 * PHP 7.3 or newer
 * get_browser php extension enabled
-* Database (By default there is a MySQL database connection setup in Framework/Database/MySQL.php but this can be customized)
+* Database (By default there is a MySQL database connection setup in `Framework/Database/MySQL.php` but this can be customized)
 * Web server with support for PHP (support for apache is pre-supplied see .htaccess, for nginx a custom setup is needed)
 
 #### Installation
