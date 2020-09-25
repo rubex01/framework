@@ -3,6 +3,7 @@
 namespace App\Controllers;
 
 use Framework\Exceptions\HttpExceptions;
+use Framework\Storage\Storage;
 use Framework\Validation\Validation;
 use Framework\Request\Request;
 use Framework\Pages\Pages;
