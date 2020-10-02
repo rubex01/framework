@@ -2,9 +2,10 @@
 $variables = [
     //Application info
     'APP_NAME' => 'Framework',
-    'CACHING' => true,
+    'CACHING' => false,
     'ENVIRONMENT' => 'development',
     'DEBUGGING' => false,
+    'BASEPATH' => '/',
 
     //Default MySQL database credentials
     'DB_HOST' => 'localhost',

@@ -1,4 +1,9 @@
-<div class="container">
+<div class="container" style="
+    background: url('<?php echo BASEPATH; ?>/assets/images/background.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: right center;
+">
     <div class="block">
         <div class="block-subtitle">
             <h4 class="block-subtitle-text"><?php echo htmlspecialchars($data['subheader']); ?></h4>

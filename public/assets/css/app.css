@@ -11,10 +11,6 @@ html, body {
     width: 100%;
     display: flex;
     align-items: center;
-    background: url('/assets/images/background.png');
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-position: right center;
 }
 
 .block {
