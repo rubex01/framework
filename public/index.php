@@ -27,7 +27,7 @@ namespace {
     */
 
     Route::get('/', [App\Controllers\ExampleController::class, 'index']);
-    
+
     Route::run();
 }
 
