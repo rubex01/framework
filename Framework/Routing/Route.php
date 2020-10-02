@@ -92,9 +92,8 @@ class Route extends Router
      */
     public static function middleware(array $middlewareArray) : object
     {
-        $key = array_search(self::$currentRoute, self::$routes);
         foreach ($middlewareArray as $middleware) {
-            self::$routes[$key]['middleware'][] = $middleware;
+            self::$routes[self::$currentRoute['id']]['middleware'][] = $middleware;
         }
         return new static;
     }
@@ -107,8 +106,7 @@ class Route extends Router
      */
     public static function action(string $action) : object
     {
-        $key = array_search(self::$currentRoute, self::$routes);
-        self::$routes[$key]['action'] = $action;
+        self::$routes[self::$currentRoute['id']]['action'] = $action;
         return new static;
     }
 }

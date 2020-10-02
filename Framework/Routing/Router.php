@@ -91,6 +91,7 @@ class Router
         ];
 
         self::$currentRoute = [
+            'id' => array_key_last(self::$routes),
             'expression' => $expression,
             'function' => $function,
             'method' => $method
@@ -124,8 +125,7 @@ class Router
      */
     public static function disableCSRF() : object
     {
-        $key = array_search(self::$currentRoute, self::$routes);
-        self::$routes[$key]['csrf'] = false;
+        self::$routes[self::$currentRoute['id']]['csrf'] = false;
         return new static;
     }
 
