@@ -4,7 +4,7 @@ $variables = [
     'APP_NAME' => 'Framework',
     'CACHING' => false,
     'ENVIRONMENT' => 'development',
-    'DEBUGGING' => false,
+    'DEBUGGING' => true,
     'BASEPATH' => '/',
 
     //Default MySQL database credentials
