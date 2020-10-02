@@ -16,9 +16,6 @@ namespace {
     Database::connect($database);
     $Authorization = new Auth();
 
-    // Defining basepath of app
-    define('BASEPATH', '/');
-
     /*
     |--------------------------------------------------------------------------
     | Web Routes

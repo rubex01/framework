@@ -1,9 +1,11 @@
 <?php
 
+// Decide if error reporting needs to be enabled
 if (getenv('ENVIRONMENT') === 'production' && getenv('DEBUGGING') == false || getenv('DEBUGGING') == false) {
     error_reporting(0);
 }
 
+// Load in all the environment variables
 if (file_exists(__DIR__ . '/../.env.php')) {
     include __DIR__ . '/../.env.php';
     foreach ($variables as $key => $value) {
@@ -11,6 +13,11 @@ if (file_exists(__DIR__ . '/../.env.php')) {
     }
 }
 
+// Defining basepath of app
+define('BASEPATH', getenv('BASEPATH'));
+
+
+// Autoloading all classes
 spl_autoload_register(function ($className) {
 
     $extension = '.php';
