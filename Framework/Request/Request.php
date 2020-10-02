@@ -57,7 +57,7 @@ class Request
         if (isset($this->headers['Content-Type']) && $this->headers['Content-Type'] === 'application/json') {
             return json_decode(file_get_contents('php://input'), true);
         }
-        return array_merge($_FILES, $_POST);
+        return array_merge($_FILES, $_POST, $_GET);
     }
 
     /**
