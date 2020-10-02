@@ -16,7 +16,6 @@ if (file_exists(__DIR__ . '/../.env.php')) {
 // Defining basepath of app
 define('BASEPATH', getenv('BASEPATH'));
 
-
 // Autoloading all classes
 spl_autoload_register(function ($className) {
 
