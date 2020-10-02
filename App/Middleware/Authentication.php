@@ -2,17 +2,17 @@
 
 namespace App\Middleware;
 
+use Framework\Auth\Auth;
+
 class Authentication
 {
     public function handle()
     {
-        if (1 === 1) {
-            return true;
-        }
+        return Auth::check();
     }
 
     public function onFailure()
     {
-        echo 'error';
+        echo 'You are not authenticated';
     }
 }
