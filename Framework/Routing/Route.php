@@ -88,25 +88,27 @@ class Route extends Router
      * Add middleware to route
      * 
      * @param array $middlewareArray
-     * @return void
+     * @return object
      */
-    public static function middleware(array $middlewareArray) : void
+    public static function middleware(array $middlewareArray) : object
     {
         $key = array_search(self::$currentRoute, self::$routes);
         foreach ($middlewareArray as $middleware) {
             self::$routes[$key]['middleware'][] = $middleware;
         }
+        return new static;
     }
 
     /**
      * Add action to route to later check if permission needs to be granted
      *
      * @param string $action
-     * @return void
+     * @return object
      */
-    public static function action(string $action) : void
+    public static function action(string $action) : object
     {
         $key = array_search(self::$currentRoute, self::$routes);
         self::$routes[$key]['action'] = $action;
+        return new static;
     }
 }
