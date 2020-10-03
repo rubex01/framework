@@ -6,7 +6,7 @@ use Framework\Auth\Auth;
 
 class Authentication
 {
-    public function handle()
+    public function handle() : bool
     {
         return Auth::check();
     }

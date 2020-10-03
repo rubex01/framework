@@ -16,6 +16,9 @@ trait TemplateTraits
             case 'migration':
                 $extension = date('Ymdhms');
                 break;
+            case 'layout':
+                $extension = '.layout';
+                break;
             default:
                 $extension = '';
         }
