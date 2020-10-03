@@ -2,12 +2,12 @@
 
 $fileContent = '<?php
 
-namespace Migrations;
+namespace '.$namespace.';
 
 use Framework\Migrations\Migrations;
 use Framework\Migrations\MigrationInterface;
 
-class ' . $className . ' extends Migrations implements MigrationInterface
+class ' . $name . ' extends Migrations implements MigrationInterface
 {
     public function up(): void
     {

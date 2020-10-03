@@ -1,0 +1,8 @@
+{
+  "migration": {
+    "path": "Migrations"
+  },
+  "controller": {
+    "path": "App/Controllers"
+  }
+}
