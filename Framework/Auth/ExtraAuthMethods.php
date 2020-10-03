@@ -67,7 +67,7 @@ trait ExtraAuthMethods
         );
         $stmt->execute();
 
-        setcookie('token', $token, time() + (86400 * 99), "/");
+        setcookie('token', $token, time() + (86400 * 99), '/', getenv('DOMAIN'), getenv('SECURE'), getenv('HTTP_ONLY'));
 
         return true;
     }

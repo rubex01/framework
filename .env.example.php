@@ -12,4 +12,9 @@ $variables = [
     'DB_USERNAME' => 'root',
     'DB_PASSWORD' => '',
     'DB_NAME' => 'example',
+
+    //Cookies
+    'DOMAIN' => null,
+    'SECURE' => false,
+    'HTTP_ONLY' => true,
 ];

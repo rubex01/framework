@@ -72,7 +72,7 @@ class Auth
         $stmt->bind_param("s", $_COOKIE['token']);
         $stmt->execute();
         unset($_COOKIE['token']);
-        setcookie('token', null, -1, '/');
+        setcookie('token', null, -1, '/', getenv('DOMAIN'), getenv('SECURE'), getenv('HTTP_ONLY'));
         return true;
     }
 
