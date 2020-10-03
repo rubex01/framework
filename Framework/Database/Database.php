@@ -21,6 +21,7 @@ class Database
      */
     public static function connect(DatabaseInterface $databaseClass) : void
     {
-        self::$Connections[$databaseClass->name] = $databaseClass->makeDatabaseConnection();
+        $name = $databaseClass->getConnectionName();
+        self::$Connections[$name] = $databaseClass->makeDatabaseConnection();
     }
 }

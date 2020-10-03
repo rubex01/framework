@@ -1,7 +1,6 @@
 <?php
 
 use Framework\Database\Database;
-use Framework\Database\MySQL;
 
 include __DIR__ . '/../autoload.php';
 
@@ -42,8 +41,25 @@ class Run
      */
     public static function init()
     {
-        $database = new MySQL;
+        $scanDir = scandir(__DIR__ . '/../../Databases', SCANDIR_SORT_DESCENDING);
+        $databases = array_diff($scanDir, array('.', '..'));
+
+        foreach ($databases as $key => $database) {
+            $databases[$key] = basename($database, '.php');
+        }
+
+        if (count($databases) > 1) {
+            $chosenDatabase = self::chooseDatabase($databases);
+            $dbClass =  'Databases\\'.$chosenDatabase;
+            $database = new $dbClass;
+        }
+        else {
+            $dbClass =  'Databases\\'.$databases[0];
+            $database = new $dbClass;
+        }
+
         Database::connect($database);
+
 
         $method = self::getMigrationMethod();
         self::$migrationFiles = self::getMigrationFiles();
@@ -52,6 +68,28 @@ class Run
         if (count(self::$errors) > 0) {
             self::reportError();
         }
+    }
+
+    /**
+     * Let user choose database when there is more then one
+     *
+     * @param array $databases
+     * @return string
+     */
+    public static function chooseDatabase(array $databases)
+    {
+        echo 'There are multiple databases in the Database folder. Choose one of the following to migrate to: [';
+        foreach ($databases as $key => $database) {
+            echo $key === count($databases)-1 ? $database . ']: ' : $database . ', ';
+        }
+        $handle = fopen ("php://stdin","r");
+        $line = fgets($handle);
+        if(!in_array(trim($line), $databases)){
+            self::$errors[] = 'The specified database could not be found in the database folder.';
+            self::reportError();
+            exit();
+        }
+        return trim($line);
     }
 
     /**

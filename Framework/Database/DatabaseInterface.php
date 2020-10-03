@@ -11,6 +11,13 @@ interface DatabaseInterface {
     public function makeDatabaseConnection();
 
     /**
+     * Returns name of the connection
+     *
+     * @return string
+     */
+    public function getConnectionName();
+
+    /**
      * In case of connection error trigger exception
      * 
      * @param string $causeOfException

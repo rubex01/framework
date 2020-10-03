@@ -13,4 +13,8 @@ class Config
     public static $exceptionHandler = [
 
     ];
+
+    public static $enabledFunctions = [
+        'authorization' => true,
+    ];
 }

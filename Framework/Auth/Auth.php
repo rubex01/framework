@@ -4,6 +4,7 @@ namespace Framework\Auth;
 
 use Framework\Database\Database;
 use Framework\Auth\ExtraAuthMethods;
+use Framework\Exceptions\HttpExceptions;
 
 class Auth
 {
@@ -21,6 +22,8 @@ class Auth
 
     public static $authStatus;
 
+    public static $init = false;
+
     /**
      * Auth constructor.
      *
@@ -28,9 +31,22 @@ class Auth
      */
     public function __construct()
     {
+        self::$init = true;
         self::$database = reset(Database::$Connections);
         self::$deviceFingerPrint = self::getDeviceFingerprint();
         self::$authStatus = self::initialAuthCheck();
+    }
+
+    public static function checkInitialization()
+    {
+        if (!self::$init) {
+            try {
+                throw new HttpExceptions('Please enable authorization in the App/Config.php file to use auth functions', 500);
+            }
+            catch (HttpExceptions $e) {
+                exit();
+            }
+        }
     }
 
     /**
@@ -40,6 +56,7 @@ class Auth
      */
     public static function check() : bool
     {
+        self::checkInitialization();
         return self::$authStatus;
     }
 
@@ -50,6 +67,7 @@ class Auth
      */
     public static function logout() : bool
     {
+        self::checkInitialization();
         $stmt = self::$database->prepare('DELETE FROM user_sessions WHERE token = ?');
         $stmt->bind_param("s", $_COOKIE['token']);
         $stmt->execute();
@@ -66,6 +84,7 @@ class Auth
      */
     public static function login(array $user) : bool
     {
+        self::checkInitialization();
         $userData = self::getUserData('email', $user['email']);
         if (password_verify($user['password'], $userData['password'])) {
             if (self::generateLogin($userData) !== true) {
@@ -88,6 +107,7 @@ class Auth
      */
     public static function logoutOtherDevices(string $password) : bool
     {
+        self::checkInitialization();
         if (!password_verify($password, self::$passwordHash)) {
             return false;
         }

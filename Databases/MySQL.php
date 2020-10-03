@@ -1,58 +1,58 @@
 <?php
 
-namespace Framework\Database;
+namespace Databases;
 
-use mysqli;
 use Framework\Database\DatabaseInterface;
 use Framework\Exceptions\HttpExceptions;
+use mysqli;
 
 class MySQL implements DatabaseInterface
 {
     /**
      * Key of connection in database connections array
-     * 
+     *
      * @var string
      */
     public $name = 'MySQL';
 
     /**
      * Contains database connection
-     * 
+     *
      * @var object
      */
     public $Conn;
 
     /**
      * Contains servername
-     * 
+     *
      * @var string
      */
     private $serverName;
 
     /**
      * Contains username
-     * 
+     *
      * @var string
      */
     private $username;
 
     /**
      * Contains password
-     * 
+     *
      * @var string
      */
     private $password;
 
     /**
      * Contains database name
-     * 
+     *
      * @var string
      */
     private $dbName;
 
     /**
      * Make database connection
-     * 
+     *
      * @return object
      */
     public function makeDatabaseConnection() : object
@@ -67,13 +67,23 @@ class MySQL implements DatabaseInterface
         if ($this->Conn->connect_error) {
             $this->connectionError($this->Conn->connect_error);
         }
-        
+
         return $this->Conn;
     }
 
     /**
+     * Returns name of the db connection
+     *
+     * @return string
+     */
+    public function getConnectionName() : string
+    {
+        return $this->name;
+    }
+
+    /**
      * Error handling in case of failed connection
-     * 
+     *
      * @return void
      */
     public function connectionError(string $causeOfException) : void
