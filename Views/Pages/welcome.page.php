@@ -12,7 +12,7 @@
             <h1 class="block-title-text"><?php echo $data['header']; ?></h1>
         </div>
         <div class="block-action">
-            <a href="/test" type="button" role="button" class="block-action-button">See the documentation</a>
+            <a href="https://github.com/rubex01/framework-rubex/wiki" target="_blank" type="button" role="button" class="block-action-button">See the documentation</a>
         </div>
     </div>
 </div>

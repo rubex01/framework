@@ -15,7 +15,7 @@ class CSRF
     public static function init() : void
     {
         if (!isset($_COOKIE['CSRFToken'])) {
-            setcookie('CSRFToken', bin2hex(random_bytes(32)), time() + (86400 * 30), "/");
+            setcookie('CSRFToken', bin2hex(random_bytes(32)), time() + (86400 * 30), '/', getenv('DOMAIN'), getenv('SECURE'), getenv('HTTP_ONLY'));
         }
     }
 
