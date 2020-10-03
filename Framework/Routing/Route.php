@@ -109,4 +109,33 @@ class Route extends Router
         self::$routes[self::$currentRoute['id']]['action'] = $action;
         return new static;
     }
+
+    /**
+     * Group of routes that have a prefix or have the same middleware applied to them
+     *
+     * @param array $groupInformation
+     * @return object
+     */
+    public static function group(array $groupInformation) : object
+    {
+        foreach ($groupInformation['routes'] as $key => $route) {
+
+            $key = $route::$currentRoute['id']-$key;
+
+            $groupRoute = self::$routes[$key];
+
+            if (isset($groupInformation['prefix'])) {
+                $groupRoute['expression'] = $groupInformation['prefix'] . $groupRoute['expression'];
+            }
+
+            if (isset($groupInformation['middleware'])) {
+                foreach ($groupInformation['middleware'] as $middleware) {
+                    $groupRoute['middleware'][] = $middleware;
+                }
+            }
+
+            self::$routes[$key] = $groupRoute;
+        }
+        return new static;
+    }
 }
