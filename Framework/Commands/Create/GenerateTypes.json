@@ -4,5 +4,14 @@
   },
   "controller": {
     "path": "App/Controllers"
+  },
+  "database": {
+    "path": "Databases"
+  },
+  "middleware": {
+    "path": "App/Middleware"
+  },
+  "layout": {
+    "path": "Views/Layouts"
   }
 }

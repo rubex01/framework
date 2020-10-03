@@ -79,6 +79,10 @@ class Create
     {
         $name = self::requestInput('What do you want the name to be:');
 
+        if ($name[0] == '/') {
+            $name = substr($name, 1);
+        }
+
         if (strpos($name, '/')) {
             $pathToCreate = '';
             $pathArray = explode('/', $name);
@@ -100,8 +104,6 @@ class Create
 
         $file = __DIR__ . '/Templates/'.$this->generateType.'Template.php';
         include_once $file;
-
-
 
         $newFile = fopen(__DIR__ . '/../../../'.$path.'/' . $name . '.php', 'w');
         fwrite($newFile, $fileContent);
