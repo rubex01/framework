@@ -1,6 +1,4 @@
-<?php
-
-$fileContent = '<html>
+<html>
 
 <head>
     {{ @include(head) }}
@@ -8,8 +6,8 @@ $fileContent = '<html>
 
 <body>
 
-    {{ @content }}
+{{ @content }}
 
 </body>
 
-</html>';
+</html>
