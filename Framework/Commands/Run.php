@@ -3,6 +3,7 @@
 namespace Framework\Commands;
 
 include __DIR__ . '/../autoload.php';
+include __DIR__ . '/../bootstrap.php';
 
 error_reporting(0);
 
