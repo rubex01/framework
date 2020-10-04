@@ -2,8 +2,8 @@
     <div>
 
         <div class="table-error-title">
-            <h1><?php echo $data['code']; ?></h1>
-            <h4><?php echo $data['message']; ?></h4>
+            <h1>{{ $code }}</h1>
+            <h4>{{ $message }}</h4>
         </div>
 
         <hr class="error-hr">
@@ -18,25 +18,25 @@
                 <th>Arguments</th>
             </tr>
 
-            <?php foreach ($data['trace'] as $trace) { ?>
+            {{ @for($trace as $trace) }}
                 <tr class="error-list">
                     <td>
-                        <span class="error-file"><?php print_r($trace['file']); ?></span>
+                        <span class="error-file">{{ array($trace['file']) }}</span>
                     </td>
                     <td>
-                        <span class="error-line"><?php print_r($trace['line']); ?></span>
+                        <span class="error-line">{{ array($trace['line']) }}</span>
                     </td>
                     <td>
-                        <span class="error-function"><?php print_r($trace['function']); ?>()</span>
+                        <span class="error-function">{{ array($trace['function']) }}()</span>
                     </td>
                     <td>
-                        <span class="error-type"><?php print_r($trace['type']); ?></span>
+                        <span class="error-type">{{ array($trace['type']) }}</span>
                     </td>
                     <td>
-                        <span class="error-args"><?php print_r($trace['args']); ?></span>
+                        <span class="error-args">{{ array($trace['args']) }}</span>
                     </td>
                 </tr>
-            <?php } ?>
+            {{ @endfor }}
 
         </table>
     </div>

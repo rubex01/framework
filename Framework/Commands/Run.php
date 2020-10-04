@@ -4,6 +4,8 @@ namespace Framework\Commands;
 
 include __DIR__ . '/../autoload.php';
 
+error_reporting(0);
+
 class Run
 {
     use \Framework\Commands\RunTraits;
@@ -18,6 +20,7 @@ class Run
         'Create',
         'RunMigrations',
         'EnableRoles',
+        'RunTemplateRender'
     ];
 
     /**

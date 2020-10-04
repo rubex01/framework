@@ -6,6 +6,7 @@ $variables = [
     'ENVIRONMENT' => 'development',
     'DEBUGGING' => true,
     'BASEPATH' => '/',
+    'AUTOCOMPILE' => true,
 
     //Default MySQL database credentials
     'DB_HOST' => 'localhost',
