@@ -3,12 +3,12 @@
 $fileContent = '<html>
 
 <head>
-    <?php include __DIR__ . "/../Components/head.component.php"; ?>
+    {{ @include(head) }}
 </head>
 
 <body>
 
-    <?php include_once $page; ?>
+    {{ @content }}
 
 </body>
 
