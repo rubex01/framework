@@ -14,13 +14,13 @@ trait TemplateTraits
     {
         switch ($generateType) {
             case 'migration':
-                $extension = date('Ymdhms').'.php';
+                $extension = date('Ymdhms');
                 break;
             case 'layout':
                 $extension = '.layout';
                 break;
             default:
-                $extension = '.php';
+                $extension = '';
         }
         return $extension;
     }
