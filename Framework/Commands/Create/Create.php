@@ -105,7 +105,7 @@ class Create
         $file = __DIR__ . '/Templates/'.$this->generateType.'Template.php';
         include_once $file;
 
-        $newFile = fopen(__DIR__ . '/../../../'.$path.'/' . $name . '.php', 'w');
+        $newFile = fopen(__DIR__ . '/../../../'.$path.'/' . $name, 'w');
         fwrite($newFile, $fileContent);
 
         echo 'Your ' . $this->generateType . ' has been generated';

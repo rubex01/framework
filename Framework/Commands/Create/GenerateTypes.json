@@ -12,6 +12,6 @@
     "path": "App/Middleware"
   },
   "layout": {
-    "path": "Views/Layouts"
+    "path": "Views/Templating/Layouts"
   }
 }
