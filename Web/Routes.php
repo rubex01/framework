@@ -13,14 +13,3 @@ use Framework\Routing\Route;
 */
 
 Route::get('/', [App\Controllers\ExampleController::class, 'index']);
-
-Route::group(
-    [
-        'prefix' => '/auth',
-        'middleware' => ['auth'],
-        'routes' => [
-            Route::get('/account', [App\Controllers\ExampleController::class, 'index']),
-            Route::get('/logout', [App\Controllers\ExampleController::class, 'index']),
-        ]
-    ]
-);
