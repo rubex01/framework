@@ -1,2 +1,2 @@
 <title>{{ $title }}</title>
-<link rel="stylesheet" href="<?php echo BASEPATH; ?>/assets/css/app.css">
+<link rel="stylesheet" href="http://localhost<?php echo BASEPATH; ?>/assets/css/app.css">

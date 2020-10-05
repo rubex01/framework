@@ -1,5 +1,5 @@
 <div class="container" style="
-    background: url('<?php echo BASEPATH; ?>/assets/images/background.png');
+    background: url('http://localhost<?php echo BASEPATH; ?>/assets/images/background.png');
     background-repeat: no-repeat;
     background-size: cover;
     background-position: right center;
