@@ -48,7 +48,9 @@ class TemplateEngine
             if (!in_array($extension, $this->templateItems)) {
                 $this->createTree($directory.'/'.$templateItem);
             }
-            $this->templatesTree[$directory][] = $templateItem;
+            else {
+                $this->templatesTree[$directory][] = $templateItem;
+            }
         }
     }
 
