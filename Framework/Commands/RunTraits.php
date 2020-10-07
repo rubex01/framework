@@ -13,8 +13,8 @@ trait RunTraits {
     {
         if (!file_exists(__DIR__ . '/../../.env.php')) {
             echo "Heya, we think you are new. Let us spin up the frame work for you!..";
-            $request = self::requestInput('Do you want to continue?', ['yes', 'no']);
-            if ($request === 'yes') {
+            $request = self::requestInput('Do you want to continue?', ['(Y)es', '(N)o']);
+            if ($request == 'yes' || $request == 'y') {
                 $start = new \Framework\Commands\Start\Start;
                 $start->start();
                 exit();
