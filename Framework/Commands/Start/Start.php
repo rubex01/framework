@@ -93,8 +93,8 @@ class Start
      */
     public function getContinue() : void
     {
-        $continue = self::requestInput('Do you want to continue, or setup the .ENV file yourself?', ['yes', 'no']);
-        if ($continue !== 'yes') {
+        $continue = self::requestInput('Do you want to continue, or setup the .ENV file yourself?', ['(Y)es', '(N)o']);
+        if ($continue != 'yes' && $continue != 'y') {
             echo "Alright, you can find the .ENV file in the root of your project.";
             exit();
         }
@@ -127,8 +127,8 @@ class Start
      */
     public function getAutoCompile() : void
     {
-        $autoCompile = self::requestInput('Do you want the framework to autocompile template files?', ['yes', 'no']);
-        if ($autoCompile !== 'yes') {
+        $autoCompile = self::requestInput('Do you want the framework to autocompile template files?', ['(Y)es', '(N)o']);
+        if ($autoCompile != 'yes' && $autoCompile != 'y') {
             $this->autoCompile = false;
         }
         else {
