@@ -5,7 +5,7 @@ namespace Migrations;
 use Framework\Migrations\Migrations;
 use Framework\Migrations\MigrationInterface;
 
-class users20200921080934 extends Migrations implements MigrationInterface
+class users20200921080920 extends Migrations implements MigrationInterface
 {
     public function up(): void
     {
