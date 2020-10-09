@@ -115,7 +115,7 @@ class RunMigrations
             $sortedArray[$key] = $sortedArrayItem['file'];
         }
 
-        $this->migrationFiles = ($this->migrationMethod === 'up') ? array_reverse($sortedArray) : $sortedArray;
+        $this->migrationFiles = ($this->migrationMethod === 'up') ? $sortedArray : array_reverse($sortedArray);
     }
 
     /**
