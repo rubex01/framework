@@ -14,7 +14,7 @@ trait TemplateTraits
     {
         switch ($generateType) {
             case 'migration':
-                $extension = date('YmdHms');
+                $extension = date('YmdHis');
                 break;
             case 'layout':
                 $extension = '.layout';
