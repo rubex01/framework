@@ -1,0 +1,3 @@
+{{ @parameters(subtitle: $text) }}
+
+<p class="container-content-subheader-text">{{ $text }}</p>
