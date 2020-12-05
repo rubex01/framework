@@ -1,0 +1,5 @@
+{{ @parameters(title: $text) }}
+
+<h1 class="container-content-header-text">
+    {{ $!!text!! }}
+</h1>
