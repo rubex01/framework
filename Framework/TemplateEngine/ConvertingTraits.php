@@ -34,7 +34,43 @@ trait ConvertingTraits
      */
     public function includeConvert(string $templateString) : string
     {
-        return 'include "'.str_replace('\\', '/', __DIR__).'/../../Views/Rendered/Components/'.substr($templateString, 9, -1).'.component.php";';
+        $componentName = substr($templateString, 9, -1);
+        $parameterDeclareString = '';
+
+        if (strpos($componentName, '(') !== false) {
+
+
+            $ini = strpos($componentName, '(');
+            $ini += strlen('(');
+            $len = strpos($componentName, ')', $ini) - $ini;
+            $originalVarNamesString = substr($componentName, $ini, $len);
+            $originalVarNamesArray = explode(',', $originalVarNamesString);
+
+            $componentName = explode('(', $componentName)[0];
+
+            foreach ($this->componentParameters[$componentName] as $key => $parameter) {
+                $parameterDeclareString .= "$parameter = $originalVarNamesArray[$key]; ";
+            }
+        }
+
+        return $parameterDeclareString . ' include "'.str_replace('\\', '/', __DIR__).'/../../Storage/App/CompiledTemplates/Components/'.$componentName.'.component.php";';
+    }
+
+    /**
+     * Save the parameters of the component for later use
+     *
+     * @param string $templateString
+     * @return string
+     */
+    public function componentParameters(string $templateString) : string
+    {
+        $parameterInfo = substr($templateString, 12, -1);
+        $componentName = explode(':', $parameterInfo)[0];
+        $parametersString = substr($parameterInfo, (strlen($componentName)+2));
+        $parameterNamesArray = explode(', ', $parametersString);
+
+        $this->componentParameters[$componentName] = $parameterNamesArray;
+        return '/* parameters for this component are: '.$parametersString.' */';
     }
 
     /**

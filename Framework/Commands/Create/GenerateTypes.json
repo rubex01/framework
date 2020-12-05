@@ -16,7 +16,7 @@
     "extension": ".php"
   },
   "layout": {
-    "path": "Views/Templating/Layouts",
+    "path": "Views/Layouts",
     "extension": ""
   }
 }
