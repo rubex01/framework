@@ -80,7 +80,7 @@ trait ConvertingTraits
      */
     public function contentConvert() : string
     {
-        return 'include $page;';
+        return 'include $renderPage;';
     }
 
     /**
