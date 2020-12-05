@@ -21,7 +21,8 @@ class Run
         'Create',
         'RunMigrations',
         'EnableRoles',
-        'RunTemplateRender'
+        'RunTemplateRender',
+        'Cleanup'
     ];
 
     /**
