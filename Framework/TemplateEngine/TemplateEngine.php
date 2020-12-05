@@ -22,6 +22,8 @@ class TemplateEngine
      */
     public $templatesTree = [];
 
+    public $componentParameters = [];
+
     /**
      * TemplateEngine constructor.
      */
@@ -41,7 +43,7 @@ class TemplateEngine
      */
     public function createTree(string $directory) : void
     {
-        $templateItems = array_slice(scandir(__DIR__ . '/../../Views/Templating/'.$directory), 2);
+        $templateItems = array_slice(scandir(__DIR__ . '/../../Views/'.$directory), 2);
         foreach ($templateItems as $templateItem) {
             $templateItemParts = explode('.', $templateItem);
             $extension = end($templateItemParts);
@@ -63,7 +65,7 @@ class TemplateEngine
     {
         foreach ($this->templatesTree as $dir => $files) {
             foreach ($files as $file) {
-                $fileContent = file_get_contents(__DIR__ . '/../../Views/Templating/' . $dir.'/'.$file);
+                $fileContent = file_get_contents(__DIR__ . '/../../Views/' . $dir.'/'.$file);
 
                 $templatingStrings = $this->getReplacementStrings($fileContent, '{{ ', ' }}');
 
@@ -75,11 +77,11 @@ class TemplateEngine
 
                 $replacedFileContents = $this->replaceItems($fileContent, $toReplace);
 
-                if (!file_exists(__DIR__ . '/../../Views/Rendered/' . $dir)) {
-                    mkdir(__DIR__ . '/../../Views/Rendered/' . $dir, 0777, true);
+                if (!file_exists(__DIR__ . '/../../Storage/App/CompiledTemplates/' . $dir)) {
+                    mkdir(__DIR__ . '/../..//Storage/App/CompiledTemplates/' . $dir, 0777, true);
                 }
 
-                $templateRender = fopen(__DIR__ . '/../../Views/Rendered/' . $dir.'/'.$file.'.php', "w");
+                $templateRender = fopen(__DIR__ . '/../../Storage/App/CompiledTemplates/' . $dir.'/'.$file.'.php', "w");
                 fwrite($templateRender, $replacedFileContents);
                 fclose($templateRender);
             }
@@ -124,6 +126,9 @@ class TemplateEngine
                 break;
             case substr($templateString, 0, 5) === '@for(':
                 $convertedString = $this->forConvert($templateString);
+                break;
+            case substr($templateString, 0, 12) === '@parameters(':
+                $convertedString = $this->componentParameters($templateString);
                 break;
             case substr($templateString, 0, 7) === '@endfor':
                 $convertedString = $this->endForConvert($templateString);
