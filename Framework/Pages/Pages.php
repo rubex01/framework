@@ -15,7 +15,7 @@ class Pages
     public static function view(string $viewLayout, string $viewPage, array $dataToPassOn, bool $cacheEnabled = false) : void
     {
         extract($dataToPassOn);
-        $page = __DIR__ . '/../../Storage/App/CompiledTemplates/Pages/' . $viewPage . '.page.php';
+        $renderPage = __DIR__ . '/../../Storage/App/CompiledTemplates/Pages/' . $viewPage . '.page.php';
 
         if (getenv('CACHING') == true && $cacheEnabled === true && file_exists(__DIR__ . '/../../Storage/Cache/'.$viewLayout.$viewPage.'.html') === true) {
             $time = filectime(__DIR__ . '/../../Storage/Cache/' . $viewLayout . $viewPage . '.html');
