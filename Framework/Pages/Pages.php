@@ -16,7 +16,7 @@ class Pages
     {
         extract($dataToPassOn);
         $renderPage = __DIR__ . '/../../Storage/App/CompiledTemplates/Pages/' . $viewPage . '.page.php';
-        $cacheName = md5($viewLayout . $viewPage);
+        $cacheName = base64_encode($viewLayout . $viewPage);
 
         if (getenv('CACHING') == true && $cacheEnabled === true && file_exists(__DIR__ . '/../../Storage/Cache/'.$cacheName.'.html') === true) {
             $time = filectime(__DIR__ . '/../../Storage/Cache/' . $cacheName . '.html');
