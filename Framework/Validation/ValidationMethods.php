@@ -59,7 +59,7 @@ trait ValidationMethods
     /**
      * Check if input is of type file
      * 
-     * @parameter array $input
+     * @param array $input
      * @return boolean
      */
     private function fileFilter($input)
@@ -74,7 +74,7 @@ trait ValidationMethods
     /**
      * Check if input is of type image
      * 
-     * @parameter array $input
+     * @param array $input
      * @return boolean
      */
     private function imageFilter(array $input)
@@ -88,8 +88,8 @@ trait ValidationMethods
     /**
      * Check if file is not larger then specified value
      * 
-     * @parameter array $input
-     * @parameter string $size
+     * @param array $input
+     * @param string $size
      * @return boolean
      */
     private function fileSizeFilter(array $input, string $size)

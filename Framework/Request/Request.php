@@ -83,7 +83,7 @@ class Request
     /**
      * Get specified input from body
      * 
-     * @parameter string $name
+     * @param string $name
      * @return string|array
      */
     public function input(string $name = null) 
