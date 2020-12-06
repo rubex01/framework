@@ -288,7 +288,7 @@ class Router
         
         $parameters = $reflectionClass->getMethod($methodName)->getParameters();
 
-        if (count($parameters) > 0) {
+        if (count($parameters) > 0 && $parameters[0]->getClass() !== null) {
             $firstParam = $parameters[0]->getClass()->name;
         }
         else {
@@ -309,7 +309,7 @@ class Router
      * @param array $matches
      * @return array
      */
-    private function urldecodeMatchesArray(array $matches) : array
+    private static function urldecodeMatchesArray(array $matches) : array
     {
         $newMatches = [];
         foreach ($matches as $match) {
@@ -324,7 +324,7 @@ class Router
      * @param array $middlewareArray
      * @return void
      */
-    private function runRouteMiddleware(array $middlewareArray) : void
+    private static function runRouteMiddleware(array $middlewareArray) : void
     {
         $allMiddleware = Config::$routeMiddleware;
 
