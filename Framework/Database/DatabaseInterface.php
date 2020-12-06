@@ -24,4 +24,11 @@ interface DatabaseInterface {
      * @return void
      */
     public function connectionError(string $causeOfException);
+
+    /**
+     * Destroys the connection to the database
+     *
+     * @return void
+     */
+    public function destroyConnection();
 }

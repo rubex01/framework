@@ -94,4 +94,14 @@ class MySQL implements DatabaseInterface
             exit();
         }
     }
+
+    /**
+     * Destroys the connection with the database
+     *
+     * @return void
+     */
+    public function destroyConnection() : void
+    {
+        $this->Conn->close();
+    }
 }
